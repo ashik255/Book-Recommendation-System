@@ -15,25 +15,25 @@ import SearchBar from './shared/NavBar/SearchBar.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserProfile from './pages/userprofile/UserProfile.jsx';
 import SignUpForm from './pages/SignUpForm/SignUpForm.jsx';
+import Home from './pages/Home/Home.jsx';
+// import { Home } from '@mui/icons-material';
 // import UserProfile from './pages/userprofile/UserProfile.jsx';
 
-function App() {
+function App({book}) {
   return (
     <div className="App">
 
 <Router>
       <div className="App">
-        <NavBar />
-        {/* <BookCard/> */}
-        {/* <UserProfile /> */}
+       <Home></Home>
         <Routes>
           {/* <Route exact path="/" component={BookList} /> Adjust as needed */}
           <Route path="/signin" element={<SignIn/>} />
           <Route path="/signup" element={<SignUpForm/>} />
           {/* <BookCard/> */}
           <Route path="/profile" element={<UserProfile/>} />
-          <Route path="/book" element={<BookCard/>} />
-          <Route path="/detail/:bookId" element={<BookDetail/>} />
+          <Route path="/book" element={<BookCard />} />
+          <Route path="/detail/:bookId" element={<BookDetail  />} />
         </Routes>
       </div>
       

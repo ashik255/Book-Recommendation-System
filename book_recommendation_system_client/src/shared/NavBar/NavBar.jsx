@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SearchBar from './SearchBar';
+import pic from './logo.png';
 // import SearchBar from './SearchBar'; // Make sure this path is correct based on your file structure
 
 const NavBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <AppBar position="static">
+    <AppBar  sx={{ bgcolor: 'text.disabled' }}  position="static">
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant="h6" component={Link} to="/" sx={{ textDecoration: 'none', color: 'inherit', mr: 2 }}>
-            LOGO
+          <Typography variant="h6" component={Link} to="/" sx={{ textDecoration: 'none', color: 'light', mr: 2 }}>
+            <img sx={{ ml: 5 }} style={{height:"32px", width:"32px",paddingLeft:"20px" }} src={pic} alt="" />
           </Typography>
         </Box>
-        <SearchBar to="/book" searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        {/* <Link to="/book"><SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /></Link> */}
+        {/* <SearchBar component={Link} to="/book" searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Button color="inherit" component={Link} to="/signin">
             Sign In
