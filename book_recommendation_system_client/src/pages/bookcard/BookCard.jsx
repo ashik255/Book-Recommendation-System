@@ -1,6 +1,13 @@
-import React from 'react';
-import { Card, CardContent, Typography, CardActions, Button, Rating } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardActions,
+  Button,
+  Rating,
+} from "@mui/material";
+import { Link } from "react-router-dom";
 
 const BookCard = ({ book }) => {
   return (
@@ -16,6 +23,7 @@ const BookCard = ({ book }) => {
       </CardContent>
       <CardActions>
         <Button
+          sx={{ marginLeft: "auto" }}
           component={Link}
           to={`/detail/${book.bookId}`}
           variant="contained"

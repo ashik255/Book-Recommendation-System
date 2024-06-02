@@ -1,30 +1,45 @@
-import React, { useState } from 'react';
-import { TextField, Button, Box, Grid, Typography } from '@mui/material';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import BookCard from '../../pages/bookcard/BookCard';
-import BookDetail from '../../pages/bookdetails/BookDetail';
+import React, { useState } from "react";
+import { TextField, Button, Box, Grid, Typography } from "@mui/material";
+import axios from "axios";
+import BookCard from "../../pages/bookcard/BookCard";
 
 const SearchBar = () => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
-  const [searching, setSearching] = useState(false); // State to handle search status
+  const [searching, setSearching] = useState(false);
 
   const handleSearch = async () => {
     if (query) {
       try {
-        setSearching(true); // Start search, update state
-        const accessToken = localStorage.getItem('authToken');
-        const response = await axios.get(`http://localhost:8080/books/${encodeURIComponent(query)}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
+        setSearching(true);
+        const accessToken = localStorage.getItem("authToken");
+
+        // Fetch books
+        const response = await axios.get(
+          `http://localhost:8080/books/${encodeURIComponent(query)}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
           }
-        });
+        );
         setBooks(response.data);
-        setSearching(false); // End search, update state
+
+        // Post search query to search history
+        await axios.post(
+          "http://localhost:8080/users/searchHistory",
+          { query },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        setSearching(false);
       } catch (error) {
         console.error("Error fetching data from Google Books API", error);
-        setSearching(false); // End search with error, update state
+        setSearching(false);
       }
     }
   };
@@ -43,13 +58,12 @@ const SearchBar = () => {
         </Grid>
         <Grid item xs={2}>
           <Button
-            to="/book"
             variant="contained"
             color="primary"
             onClick={handleSearch}
-            disabled={searching} // Disable button during search
+            disabled={searching}
           >
-            {searching ? 'Searching...' : 'Search'}
+            {searching ? "Searching..." : "Search"}
           </Button>
         </Grid>
       </Grid>
@@ -60,7 +74,7 @@ const SearchBar = () => {
               <BookCard book={book} />
             </Grid>
           ))}
-          {books.length === 0 && !searching && ( // Condition to display message when no books found
+          {books.length === 0 && !searching && (
             <Grid item xs={12}>
               <Typography variant="body1">No books found.</Typography>
             </Grid>

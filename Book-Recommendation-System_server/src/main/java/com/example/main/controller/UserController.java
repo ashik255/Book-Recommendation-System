@@ -36,13 +36,13 @@ public class UserController {
         ResponseEntity<Object> updatedUserProfile = userService.updateAuthenticatedUser(id,updatedUser);
         return ResponseEntity.ok(updatedUserProfile);
     }
-    @GetMapping("/search-history")
+    @GetMapping("/searchHistory")
     public List<SearchHistory> getSearchHistory() {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long userId = userService.findByEmail(email).getId();
         return userService.getSearchHistory(userId);
     }
-    @PostMapping("/search-history")
+    @PostMapping("/searchHistory")
     public List<SearchHistory> getSearchHistory(@RequestBody String query) {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long userId = userService.findByEmail(email).getId();

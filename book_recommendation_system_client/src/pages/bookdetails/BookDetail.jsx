@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Paper, Typography, Box, Rating } from '@mui/material';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Container, Paper, Typography, Box, Rating } from "@mui/material";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const BookDetail = () => {
   const { bookId } = useParams();
@@ -13,12 +13,15 @@ const BookDetail = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const accessToken = localStorage.getItem('authToken');
-        const response = await axios.get(`http://localhost:8080/books/id/${bookId}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
+        const accessToken = localStorage.getItem("authToken");
+        const response = await axios.get(
+          `http://localhost:8080/books/id/${bookId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
           }
-        });
+        );
         console.log("API Response:", response.data); // Add this line to check the API response
         setBook(response.data);
         setLoading(false);
