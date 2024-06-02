@@ -19,13 +19,13 @@ Provide a basic recommendation system based on a fixed set of criteria (e.g.,
 recommend top-rated books in a genre the user has searched for).
 
 ## Technologies Used
-Frontend:
--React
--React Router
--Axios
--MUI
+$ Frontend:
+- React
+- React Router
+- Axios
+- MUI
 
-##Backend:
+#Backend:
 - JDK17
 - Spring Boot
 - Spring Data JPA
