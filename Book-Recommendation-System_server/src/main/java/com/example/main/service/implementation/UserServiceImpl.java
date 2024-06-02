@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
                 .email(requestModel.getEmail())
                 .role(requestModel.getRole())
                 .fullName(requestModel.getFullName())
-//                .dateRegistered(requestModel.getDateRegistered())
                 .password(passwordEncoder.encode(requestModel.getPassword()))
                 .address(requestModel.getAddress())
                 .build();
@@ -41,7 +40,6 @@ public class UserServiceImpl implements UserService {
              .token(jwtService.generateToken(userEntity))
               .build();
        return new ResponseEntity<>(authenticationResponse, HttpStatus.CREATED);
-//        return new ResponseEntity<>("success",HttpStatus.CREATED);
     }
 
     @Override
@@ -57,7 +55,6 @@ public class UserServiceImpl implements UserService {
         userEntity.setFullName(updatedUser.getFullName());
         userEntity.setPassword(updatedUser.getPassword());
         userEntity.setRole(updatedUser.getRole());
-//        userEntity.setDateRegistered(updatedUser.getDateRegistered());
         userEntity.setAddress(updatedUser.getAddress());
         return new ResponseEntity<>(userRepository.save(userEntity),HttpStatus.OK);
     }

@@ -11,10 +11,6 @@ public interface UserService {
     ResponseEntity<Object> register(UserRequestModel requestModel);
     UserEntity getAuthenticatedUser();
     ResponseEntity<Object> updateAuthenticatedUser(Long id, UserEntity updatedUser);
-
     List<SearchHistory> getSearchHistory(Long userId);
-
-//    Thread findByEmail(String email);
-
    UserEntity findByEmail(String email);
 }
