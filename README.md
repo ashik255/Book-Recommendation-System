@@ -17,3 +17,18 @@ Users should have a profile page to view their search history.
 4. Recommendation System:
 Provide a basic recommendation system based on a fixed set of criteria (e.g.,
 recommend top-rated books in a genre the user has searched for).
+
+## Technologies Used
+Frontend:
+-React
+-React Router
+-Axios
+-MUI
+
+##Backend:
+- JDK17
+- Spring Boot
+- Spring Data JPA
+- Spring Security
+- JSON Web Tokens (JWT)
+- MySQL
