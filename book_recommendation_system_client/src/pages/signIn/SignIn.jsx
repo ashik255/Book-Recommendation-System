@@ -1,45 +1,53 @@
-import React from 'react';
-import { CssBaseline, Avatar, Typography, TextField, Button, Grid, Box, Link, Paper, Container } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React, { useState } from "react";
+import {
+  CssBaseline,
+  Avatar,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+  Box,
+  Link,
+  Paper,
+  Container,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
 function SignIn() {
+  const [successMessage, setSuccessMessage] = useState("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const loginData = {
-      email: data.get('email'),
-      password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
     };
 
     try {
-      const response = await fetch('http://localhost:8080/users/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8080/users/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(loginData),
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
-
       const result = await response.json();
       console.log(result);
 
-      // Assuming the token is in the 'token' field of the response
       const token = result.token;
-      localStorage.setItem('authToken', token);
+      localStorage.setItem("authToken", token);
 
-      // Handle successful login (e.g., redirect to dashboard)
-      // window.location.href = '/dashboard';
-
+      setSuccessMessage("Login successful!");
     } catch (error) {
-      console.error('There was a problem with the login request:', error);
-      // Handle login error (e.g., display error message)
+      console.error("There was a problem with the login request:", error);
     }
   };
 
@@ -50,18 +58,23 @@ function SignIn() {
         <Paper elevation={6} square sx={{ padding: 3, marginTop: 8 }}>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -92,11 +105,16 @@ function SignIn() {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href="/signup" variant="body2">
+                  <Link sx={{ pl: 6 }} href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
+              {successMessage && (
+                <Typography variant="body1" color="black">
+                  {successMessage}
+                </Typography>
+              )}
             </Box>
           </Box>
         </Paper>

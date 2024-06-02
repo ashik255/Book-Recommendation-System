@@ -1,0 +1,15 @@
+.recommendations-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust spacing between cards */
+  }
+  
+  .book-card {
+    flex: 1;
+    max-width: 40%; /* Adjust this value to fit your design */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 220px;
+    overflow: hidden;
+  }
+  
